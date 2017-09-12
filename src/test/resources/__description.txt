@@ -1,0 +1,18 @@
+4-brad-huther.pdf				Includes images in jpg and pbm
+4anywhere.pdf					Includes ObjStm simple
+63fr17142.pdf					ASCII85Decode + LZWDecode
+67fr71477.pdf					Encrypted => 206 0 / Contents + XML content
+act_renewal_charter_2011.pdf	XRef as Stream Obj 
+bsa_letter_regarding_exemption_5.pdf											Encrypted => Encryption defined in /XRef
+CVE_2010-2883_PDF_4E6B17825E645732A1CF6394844A5B47								sample of PDF with flaws + XFA Stream
+e108432dd9dad6ff57c8de6e907fd6dd25b62673bd4799fa1a47b200db5acf7c				XFA_Fragments containing Javascript
+Example PDF - Encrypted with Low Quality Printing and Password to View.pdf		Input password required to decode
+f13315.pdf						Containing InString JS
+f2350.pdf						Several ObjStm grouped in the same ObjStm
+f8613_accessible.pdf			XFA Array
+pdf-doc-vba-eicar-dropper.pdf	Delegation sample to OLE plugin
+RichContentorFlash (3).pdf		Sample with Decripted JPG images
+RichContentorFlash (4).pdf		ObjStm with warnings
+sample1.pdf						Basic Sample
+sample2.pdf						Basic Sample
+win7-puzzle.pdf					Encoded blanks: decoded make a 100Mo file
