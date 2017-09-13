@@ -15,6 +15,11 @@
 More information at https://www.pnfsoftware.com/jeb2/pdfplugin
 
 
+# Additional Resources
+
+How to build a simple automation system to scan PDF files: https://www.pnfsoftware.com/blog/scanning-pdf-files-using-jeb2/ and the associated slide deck is at https://docs.google.com/presentation/d/1PzqNg026HBflOozB7g_Vsxy-XfDQm0JQynsph5tfXuQ/pub
+
+
 # Source
 
 ## How to Build
