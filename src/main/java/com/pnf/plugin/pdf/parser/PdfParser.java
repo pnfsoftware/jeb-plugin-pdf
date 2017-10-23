@@ -59,11 +59,13 @@ import com.pnfsoftware.jeb.util.logging.ILogger;
 public class PdfParser {
     private static final ILogger logger = GlobalLog.getLogger(PdfParser.class);
 
+    private String version = "";
+
     /** Master streams to be displayed (all except /Extends ones) */
-    private Set<PdfStream> streams = new TreeSet<PdfStream>();
+    private Set<PdfStream> streams = new TreeSet<>();
 
     /** Decoded strings */
-    private List<PdfString> strings = new ArrayList<PdfString>();
+    private List<PdfString> strings = new ArrayList<>();
 
     private final PdfFileUnit unit;
 
@@ -71,7 +73,7 @@ public class PdfParser {
     private int trailerCount = 0;
 
     /** Objects displayed in simple view: all elements encountered with stream filtered */
-    private List<Object> simpleView = new ArrayList<Object>();
+    private List<Object> simpleView = new ArrayList<>();
 
     public PdfParser(PdfFileUnit unit) {
         this.unit = unit;
@@ -85,7 +87,7 @@ public class PdfParser {
         parseBytes(data);
         logger.debug("PDF Ojbect parsing terminated. Parsing streams...");
         PdfStatistics statistics = unit.getStatistics();
-
+        statistics.setVersion(version);
         statistics.setNbIndirectObjects(unit.getObjects().size());
 
         processObjStm();
@@ -102,10 +104,22 @@ public class PdfParser {
         int cursor = 0;
         byte[] data = IO.readInputStream(input);
         // Map<PdfObjId, PdfIndirectObj> objects = new TreeMap<PdfObjId, PdfIndirectObj>();
+        // retrieve PDF Version
+        if(data.length > 8 && PdfSpecialCharacters.isComment(data[0])) {
+            // optional PDF version header
+            if(data[1] == 'P' && data[2] == 'D' && data[3] == 'F' && data[4] == '-') {
+                StringBuilder v = new StringBuilder();
+                for(cursor = 5; cursor < data.length && !PdfSpecialCharacters.isEndComment(data, cursor); cursor++) {
+                    v.append((char)data[cursor]);
+                }
+                version = v.toString();
+            }
+        }
+
         PdfFile file = new PdfFile(unit);
-        List<PdfAttributeValue> nonProcessedAttributes = new ArrayList<PdfAttributeValue>();
+        List<PdfAttributeValue> nonProcessedAttributes = new ArrayList<>();
         int xrefStart = -1;
-        for(cursor = 0; cursor < data.length; cursor++) {
+        for(; cursor < data.length; cursor++) {
             if(PdfSpecialCharacters.isSeparator(data[cursor])) {
                 // ignore spacings
             }
@@ -275,7 +289,7 @@ public class PdfParser {
 
     private void processObjStm() {
         // Unpack ObjStm streams first in case they contains necessary data for other objects
-        Map<PdfObjId, PdfFile> createdObjects = new TreeMap<PdfObjId, PdfFile>();
+        Map<PdfObjId, PdfFile> createdObjects = new TreeMap<>();
         for(Entry<PdfObjId, PdfFile> objectEntrySet: unit.getObjects().entrySet()) {
             PdfIndirectObj o = objectEntrySet.getValue().getObject(objectEntrySet.getKey());
             try {

@@ -88,10 +88,10 @@ public class PdfFileUnit extends AbstractInteractiveBinaryUnit implements IPdfUn
     private String identifier;
     /** All objects by object id bound to their pdf section in file */
     @SerId(2)
-    private Map<PdfObjId, PdfFile> objects = new TreeMap<PdfObjId, PdfFile>();
+    private Map<PdfObjId, PdfFile> objects = new TreeMap<>();
     /** trailer list by buffer position */
     @SerId(3)
-    private Map<Integer, PdfTrailer> trailers = new TreeMap<Integer, PdfTrailer>();
+    private Map<Integer, PdfTrailer> trailers = new TreeMap<>();
     @SerId(4)
     private byte[] simpleView;
     @SerId(5)
@@ -235,7 +235,7 @@ public class PdfFileUnit extends AbstractInteractiveBinaryUnit implements IPdfUn
 
     public List<PdfIndirectObj> getObjectList() {
         if(objectList == null) {
-            objectList = new ArrayList<PdfIndirectObj>(toMap().values());
+            objectList = new ArrayList<>(toMap().values());
             Collections.sort(objectList);
 
         }
@@ -251,7 +251,7 @@ public class PdfFileUnit extends AbstractInteractiveBinaryUnit implements IPdfUn
     }
 
     private Map<PdfObjId, PdfIndirectObj> toMap() {
-        Map<PdfObjId, PdfIndirectObj> objectsMap = new TreeMap<PdfObjId, PdfIndirectObj>();
+        Map<PdfObjId, PdfIndirectObj> objectsMap = new TreeMap<>();
         for(Entry<PdfObjId, PdfFile> objectEntrySet: objects.entrySet()) {
             objectsMap.put(objectEntrySet.getKey(), objectEntrySet.getValue().getObject(objectEntrySet.getKey()));
         }
@@ -282,7 +282,7 @@ public class PdfFileUnit extends AbstractInteractiveBinaryUnit implements IPdfUn
     }
 
     protected List<PdfIndirectObj> getAreaOfInterestObjectList() {
-        List<PdfIndirectObj> areaOfInterest = new ArrayList<PdfIndirectObj>(getStatistics().anomalyKeys());
+        List<PdfIndirectObj> areaOfInterest = new ArrayList<>(getStatistics().anomalyKeys());
         Collections.sort(areaOfInterest);
         return areaOfInterest;
     }
@@ -416,6 +416,9 @@ public class PdfFileUnit extends AbstractInteractiveBinaryUnit implements IPdfUn
     public String getDescription() {
         PdfStatistics statistics = getStatistics();
         StringBuilder stb = new StringBuilder(super.getDescription());
+        if(!Strings.isBlank(statistics.getVersion())) {
+            stb.append("- Version: ").append(statistics.getVersion()).append("\n");
+        }
         stb.append("- Number of indirect objects: ").append(statistics.getNbIndirectObjects());
         stb.append("\n- Number of stream objects: ").append(statistics.getNbStreamedObjects());
         stb.append("\n- Number of streams: ").append(statistics.getNbStreams());

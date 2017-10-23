@@ -74,13 +74,13 @@ public class PdfStatistics implements IUnitNotificationManager {
     private int nbStreams = 0;
 
     @SerId(4)
-    private Map<PdfIndirectObj, Map<IPdfAttribute, List<IUnitNotification>>> anomalies = new TreeMap<PdfIndirectObj, Map<IPdfAttribute, List<IUnitNotification>>>();
+    private Map<PdfIndirectObj, Map<IPdfAttribute, List<IUnitNotification>>> anomalies = new TreeMap<>();
 
     @SerId(5)
-    private Set<String> filtersUsed = new TreeSet<String>();
+    private Set<String> filtersUsed = new TreeSet<>();
 
     @SerId(6)
-    private Map<String, Integer> tokens = new HashMap<String, Integer>();
+    private Map<String, Integer> tokens = new HashMap<>();
 
     @SerId(7)
     private boolean isEncrypted = false;
@@ -91,8 +91,24 @@ public class PdfStatistics implements IUnitNotificationManager {
     @SerId(9)
     private IPdfUnit unit;
 
+    @SerId(10)
+    private String version = "";
+
     protected PdfStatistics(IPdfUnit unit) {
         this.unit = unit;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    /**
+     * Return Version of a PDF (be careful that version is optional in PDF documents)
+     * 
+     * @return version (1.3, 1.4 for example)
+     */
+    public String getVersion() {
+        return version;
     }
 
     public int getNbIndirectObjects() {
@@ -180,17 +196,17 @@ public class PdfStatistics implements IUnitNotificationManager {
             String description, boolean dropSameLevel) {
         Map<IPdfAttribute, List<IUnitNotification>> anomaliesByChild = anomalies.get(parent);
         if(anomaliesByChild == null) {
-            anomaliesByChild = new HashMap<IPdfAttribute, List<IUnitNotification>>();
+            anomaliesByChild = new HashMap<>();
             anomalies.put(parent, anomaliesByChild);
         }
         List<IUnitNotification> anomaliesByElement = anomaliesByChild.get(element);
         if(anomaliesByElement == null) {
-            anomaliesByElement = new ArrayList<IUnitNotification>();
+            anomaliesByElement = new ArrayList<>();
             anomaliesByChild.put(element, anomaliesByElement);
         }
         NotificationType notificationType = getNotificationType(suspicious);
         AbstractPdfParsableAttribute parentElement = element.getParent();
-        List<IUnitNotification> duplicates = new ArrayList<IUnitNotification>();
+        List<IUnitNotification> duplicates = new ArrayList<>();
         for(Entry<IPdfAttribute, List<IUnitNotification>> entry: anomaliesByChild.entrySet()) {
             for(IUnitNotification notification: entry.getValue()) {
                 if(notification.getType() == notificationType && notification.getDescription().equals(description)) {
@@ -309,7 +325,7 @@ public class PdfStatistics implements IUnitNotificationManager {
     }
 
     public static String toString(List<IUnitNotification> notifications, NotificationType filter) {
-        Set<String> notifStr = new TreeSet<String>();
+        Set<String> notifStr = new TreeSet<>();
         for(IUnitNotification n: notifications) {
             if(filter != null) {
                 if(n.getType() == filter) {
