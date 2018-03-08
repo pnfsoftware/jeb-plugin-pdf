@@ -31,6 +31,7 @@ import com.pnfsoftware.jeb.core.events.JebEventSource;
 import com.pnfsoftware.jeb.core.output.tree.INode;
 import com.pnfsoftware.jeb.core.output.tree.INodeCoordinates;
 import com.pnfsoftware.jeb.core.output.tree.ITreeDocument;
+import com.pnfsoftware.jeb.core.properties.IPropertyManager;
 import com.pnfsoftware.jeb.util.serialization.annotations.SerDisabled;
 
 /**
@@ -52,7 +53,7 @@ public class TreePdfDocument extends JebEventSource implements ITreeDocument {
     }
 
     public TreePdfDocument(PdfDictionary dictionary) {
-        attributes = new ArrayList<IPdfAttribute>();
+        attributes = new ArrayList<>();
         attributes.add(dictionary);
         statistics = dictionary.getMainParent().getPdfStatictics();
     }
@@ -60,7 +61,7 @@ public class TreePdfDocument extends JebEventSource implements ITreeDocument {
     @Override
     public List<? extends INode> getRoots() {
         if(roots == null) {
-            List<INode> nodes = new ArrayList<INode>();
+            List<INode> nodes = new ArrayList<>();
             if(objects != null) {
                 for(PdfIndirectObj obj: objects) {
                     INode newNode = new PdfObjectNode(obj.getAttribute(), obj.getId(), statistics.getAnomalies(obj),
@@ -103,6 +104,11 @@ public class TreePdfDocument extends JebEventSource implements ITreeDocument {
     @Override
     public void dispose() {
 
+    }
+
+    @Override
+    public IPropertyManager getPropertyManager() {
+        return null;
     }
 
 }
