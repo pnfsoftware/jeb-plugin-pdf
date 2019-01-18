@@ -4,7 +4,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="src" path="src/test/java"/>
-	<classpathentry kind="lib" path="[JEB_FOLDER]/bin/cl/jeb.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nicol/jeb2/TESTBUILDS/3_business-741296147584833131-3.0/bin/app/jeb.jar"/>
 	<classpathentry kind="lib" path="lib/jai-imageio-core-1.3.0.jar"/>
 	<classpathentry kind="lib" path="lib/jai-imageio-jpeg2000-1.3.0.jar"/>
 	<classpathentry kind="lib" path="lib/levigo-jbig2-imageio-1.6.3.jar"/>

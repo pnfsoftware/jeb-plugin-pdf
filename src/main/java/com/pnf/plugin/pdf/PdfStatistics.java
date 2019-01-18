@@ -353,6 +353,22 @@ public class PdfStatistics implements IUnitNotificationManager {
     }
 
     @Override
+    public IUnitNotification getNotification(String key) {
+        Collection<Map<IPdfAttribute, List<IUnitNotification>>> anomaliesPerAttr = anomalies.values();
+        for(Map<IPdfAttribute, List<IUnitNotification>> ano: anomaliesPerAttr) {
+            Collection<List<IUnitNotification>> anomaliesList = ano.values();
+            for(List<IUnitNotification> a: anomaliesList) {
+                for(IUnitNotification n: a) {
+                    if(n.getKey() != null && n.getKey().equals(key)) {
+                        return n;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
     public int getNotificationCount() {
         return getNotifications().size();
     }
@@ -363,18 +379,12 @@ public class PdfStatistics implements IUnitNotificationManager {
     }
 
     @Override
-    public void insertNotification(int index, IUnitNotification notification) {
+    public void addNotifications(Collection<? extends IUnitNotification> arg0) {
         throw new UnsupportedOperationException("A notification must be bound to a PDF Indirect Object");
     }
 
     @Override
-    public void addAllNotifications(Collection<? extends IUnitNotification> c) {
+    public boolean removeNotification(String key) {
         throw new UnsupportedOperationException("A notification must be bound to a PDF Indirect Object");
     }
-
-    @Override
-    public void removeNotification(int index) {
-        throw new UnsupportedOperationException("A notification must be bound to a PDF Indirect Object");
-    }
-
 }

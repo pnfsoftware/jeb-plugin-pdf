@@ -54,7 +54,7 @@ import com.pnfsoftware.jeb.core.events.ClientNotificationLevel;
 import com.pnfsoftware.jeb.core.events.J;
 import com.pnfsoftware.jeb.core.events.JebEvent;
 import com.pnfsoftware.jeb.core.input.BytesInput;
-import com.pnfsoftware.jeb.core.input.FileInputLocation;
+import com.pnfsoftware.jeb.core.input.FileInputRegionInformation;
 import com.pnfsoftware.jeb.core.input.IInput;
 import com.pnfsoftware.jeb.core.input.IInputLocation;
 import com.pnfsoftware.jeb.core.output.AbstractTransientUnitRepresentation;
@@ -365,19 +365,19 @@ public class PdfFileUnit extends AbstractInteractiveBinaryUnit implements IPdfUn
     @Override
     public IInputLocation addressToLocation(String address) {
         if(address.endsWith("h")) {
-            return new FileInputLocation(Long.valueOf(address.substring(0, address.length() - 1), 16));
+            return new FileInputRegionInformation(Long.valueOf(address.substring(0, address.length() - 1), 16));
         }
         else if(address.startsWith("@")) {
             return null;
         }
         IAddress addressImpl = getAddressUtils().getByAddress(address);
-        return new FileInputLocation(addressImpl.getRange()[0]);
+        return new FileInputRegionInformation(addressImpl.getRange()[0]);
     }
 
     @Override
     public String locationToAddress(IInputLocation location) {
-        if(location instanceof FileInputLocation) {
-            long offset = ((FileInputLocation)location).getOffset();
+        if(location instanceof FileInputRegionInformation) {
+            long offset = ((FileInputRegionInformation)location).getOffset();
             return getAddressUtils().getByOffset(offset).getLabel();
         }
         return null;
