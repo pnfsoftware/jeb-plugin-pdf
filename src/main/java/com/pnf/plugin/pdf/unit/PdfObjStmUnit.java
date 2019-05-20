@@ -74,7 +74,7 @@ public class PdfObjStmUnit extends AbstractStreamUnit implements IPdfUnit {
         if(UnitFormatterUtil.getPresentationByName(formatter, "ObjStm Tree") == null) {
             formatter.insertPresentation(0, new AbstractTransientUnitRepresentation("ObjStm Tree", true) {
                 @Override
-                public IGenericDocument getDocument() {
+                public IGenericDocument createDocument() {
                     TreePdfDocument document = new TreePdfDocument(getObjectList(), PdfObjStmUnit.this);
                     return document;
                 }

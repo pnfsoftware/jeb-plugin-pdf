@@ -73,7 +73,7 @@ public class BinaryStreamUnit extends AbstractStreamUnit {
                 if(defaultText != null) {
                     formatter.insertPresentation(0, new AbstractTransientUnitRepresentation(docLabel, true) {
                         @Override
-                        public IGenericDocument getDocument() {
+                        public IGenericDocument createDocument() {
                             return new AsciiDocument(new BytesInput(defaultText.getBytes()));
                         }
                     }, false);
@@ -81,7 +81,7 @@ public class BinaryStreamUnit extends AbstractStreamUnit {
                 else {
                     formatter.insertPresentation(0, new AbstractTransientUnitRepresentation(docLabel, true) {
                         @Override
-                        public IGenericDocument getDocument() {
+                        public IGenericDocument createDocument() {
                             return new AsciiDocument(getInput());
                         }
                     }, false);

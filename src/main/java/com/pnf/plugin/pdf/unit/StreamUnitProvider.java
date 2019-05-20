@@ -73,7 +73,7 @@ public class StreamUnitProvider extends AbstractUnitProvider {
     protected static AbstractUnitRepresentation getDictionaryRepresentation(final PdfStream stream) {
         return new AbstractTransientUnitRepresentation("Dictionary", false) {
             @Override
-            public IGenericDocument getDocument() {
+            public IGenericDocument createDocument() {
                 return new TreePdfDocument(stream.getDictionary());
             }
         };
@@ -87,7 +87,7 @@ public class StreamUnitProvider extends AbstractUnitProvider {
             if(stream.isEncrypted()) {
                 representations.add(new AbstractTransientUnitRepresentation("Encrypted", false) {
                     @Override
-                    public IGenericDocument getDocument() {
+                    public IGenericDocument createDocument() {
                         return new HexDumpDocument(new BytesInput(encodedDataList.get(0)));
                     }
                 });
@@ -98,7 +98,7 @@ public class StreamUnitProvider extends AbstractUnitProvider {
                 representations.add(new AbstractTransientUnitRepresentation(
                         String.format("Encoded[%d] with %s", i, getFilterName(filters, i)), false) {
                     @Override
-                    public IGenericDocument getDocument() {
+                    public IGenericDocument createDocument() {
                         return new HexDumpDocument(new BytesInput(encodedData));
                     }
                 });

@@ -293,7 +293,7 @@ public class PdfFileUnit extends AbstractInteractiveBinaryUnit implements IPdfUn
         if(UnitFormatterUtil.getPresentationByName(formatter, "Indirect Objects") == null) {
             formatter.addPresentation(new AbstractTransientUnitRepresentation("Indirect Objects", true) {
                 @Override
-                public IGenericDocument getDocument() {
+                public IGenericDocument createDocument() {
                     TreePdfDocument document = new TreePdfDocument(getObjectList(), PdfFileUnit.this);
                     return document;
                 }
@@ -303,7 +303,7 @@ public class PdfFileUnit extends AbstractInteractiveBinaryUnit implements IPdfUn
             final byte[] simple = simpleView;
             formatter.addPresentation(new AbstractTransientUnitRepresentation("Simple view", false) {
                 @Override
-                public IGenericDocument getDocument() {
+                public IGenericDocument createDocument() {
                     return new AsciiDocument(new BytesInput(simple));
                 }
             }, false);
