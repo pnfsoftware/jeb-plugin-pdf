@@ -1,6 +1,5 @@
 # PDF Document Analyzer Plugin for JEB
 
-- Requires JEB 3.4+
 - Demo: https://www.youtube.com/watch?v=PD40exjToDU
 - Improvements/fixes/suggestions are encouraged
 

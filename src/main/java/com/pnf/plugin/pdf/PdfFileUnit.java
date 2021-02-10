@@ -352,14 +352,8 @@ public class PdfFileUnit extends AbstractInteractiveBinaryUnit implements IPdfUn
     }
 
     @Override
-    public String getComment(String address) {
+    public String getPrimaryComment(String address) {
         return getAddressUtils().getByAddress(address).getComment();
-    }
-
-    @Override
-    public Map<String, String> getComments() {
-        // no comments
-        return null;
     }
 
     @Override
