@@ -347,12 +347,12 @@ public class PdfFileUnit extends AbstractInteractiveBinaryUnit implements IPdfUn
 
     @Override
     public Map<String, String> getAddressLabels() {
-        logger.info("getAddressLabels");
+        // FIXME: implement
         return null;
     }
 
     @Override
-    public String getPrimaryComment(String address) {
+    public String getInlineComment(String address) {
         return getAddressUtils().getByAddress(address).getComment();
     }
 

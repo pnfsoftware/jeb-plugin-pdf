@@ -123,7 +123,7 @@ public class PdfIndirectObj extends AbstractPdfParsableAttribute implements Comp
             }
             else {
                 if(getEndToken() == PdfSpecialCharacters.OBJ_END_SEPARATOR) {
-                    logger.info("endobj is missing for Indirect Object", getId());
+                    logger.info("endobj is missing for Indirect Object %s", getId());
                 }
                 return cursor - 1;
             }
