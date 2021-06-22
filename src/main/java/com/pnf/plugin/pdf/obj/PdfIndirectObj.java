@@ -164,7 +164,7 @@ public class PdfIndirectObj extends AbstractPdfParsableAttribute implements Comp
         if(getType() == Type.IndirectObject) {
             stb.append("obj ");
         }
-        if(attribute.getType() == Type.String) {
+        if(attribute != null && attribute.getType() == Type.String) {
             stb.append("(").append(attribute).append(")");
         }
         else {
