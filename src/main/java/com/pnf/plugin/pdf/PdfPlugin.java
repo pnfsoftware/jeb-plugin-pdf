@@ -44,7 +44,7 @@ public class PdfPlugin extends AbstractUnitIdentifier {
 
     @Override
     public PluginInformation getPluginInformation() {
-        return new PluginInformation("PDF parser", "Adobe PDF file parsing", "PNF Software", Version.create(1, 0, 6));
+        return new PluginInformation("PDF parser", "Adobe PDF file parsing", "PNF Software", Version.create(1, 0, 7));
     }
 
     @Override

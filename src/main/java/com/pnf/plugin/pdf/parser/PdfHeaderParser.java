@@ -19,6 +19,7 @@ limitations under the License.
 package com.pnf.plugin.pdf.parser;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import com.pnfsoftware.jeb.core.input.IInput;
 import com.pnfsoftware.jeb.util.io.IO;
@@ -46,9 +47,9 @@ public class PdfHeaderParser {
             return false;
         }
 
-        try {
+        try(InputStream in = input.getStream()) {
             // PDF can start with a comment or any white space character
-            byte[] data = IO.readInputStream(input.getStream());
+            byte[] data = IO.readInputStream(in);
 
             for(int cursor = 0; cursor < data.length; cursor++) {
                 if(PdfSpecialCharacters.isSeparator(data[cursor])) {
