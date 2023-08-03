@@ -2,10 +2,9 @@
 
 <!--===========================================================================
 
-Sample Ant build file used to build and package a JEB2 plugin
+Sample Ant build file used to build and package a JEB plugin
 
-Requirements: set up the JEB_HOME environment variable to point to your
-JEB2 installation folder.
+Requirements: set up the JEB_HOME environment variable to point to your JEB installation folder.
 
 Customize the outfile, entryclass, extcp_build, and extcp_manifest properties.
 
@@ -38,8 +37,8 @@ Customize the outfile, entryclass, extcp_build, and extcp_manifest properties.
     </fail>
 
     <property name="debuglevel" value="source,lines,vars"/>
-    <property name="target" value="1.8"/>
-    <property name="source" value="1.8"/>
+    <property name="target" value="11"/>
+    <property name="source" value="11"/>
 
     <!-- Mandatory properties -->
     <property name="outfile" value="out/JebPdfPlugin-${version}.jar"/>
